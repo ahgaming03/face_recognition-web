@@ -1,6 +1,7 @@
 # run = "cowsay Configure me! GG"
 modules = ["python-3.10"]
-run = "python app.py"
+run = "python backend/app.py"
+
 
 [nix]
 channel = "stable-24_05"
