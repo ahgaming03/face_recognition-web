@@ -7,6 +7,7 @@ const VideoRecorder = () => {
     const mediaRecorderRef = useRef(null);
     const [recording, setRecording] = useState(false);
     const [recordedChunks, setRecordedChunks] = useState([]);
+    const [recordedVideoUrl, setRecordedVideoUrl] = useState(null); // State to store recorded video URL
     const [processedVideoUrl, setProcessedVideoUrl] = useState(null);
     const [timer, setTimer] = useState(0); // State to track recording time
     const timerRef = useRef(null); // Ref to store the interval ID
@@ -24,6 +25,7 @@ const VideoRecorder = () => {
 
     const startRecording = () => {
         setRecordedChunks([]);
+        setRecordedVideoUrl(null); // Reset recorded video URL when starting new recording
         setTimer(0); // Reset timer when starting recording
         setRecording(true);
 
@@ -49,6 +51,11 @@ const VideoRecorder = () => {
     const stopRecording = () => {
         setRecording(false);
         mediaRecorderRef.current.stop();
+
+        // Create a URL for the recorded video
+        const blob = new Blob(recordedChunks, { type: "video/webm" });
+        const videoUrl = URL.createObjectURL(blob);
+        setRecordedVideoUrl(videoUrl); // Set the recorded video URL
     };
 
     const uploadRecording = async () => {
@@ -93,6 +100,15 @@ const VideoRecorder = () => {
                     </>
                 ) : (
                     <button onClick={startRecording}>Start Recording</button>
+                )}
+                {recordedChunks.length > 0 && recordedVideoUrl && (
+                    <div>
+                        <h2>Recorded Video:</h2>
+                        <video width="640" height="480" controls>
+                            <source src={recordedVideoUrl} type="video/webm" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
                 )}
                 {recordedChunks.length > 0 && (
                     <>

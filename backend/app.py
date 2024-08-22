@@ -14,6 +14,10 @@ PROCESSED_FOLDER = 'processed'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(PROCESSED_FOLDER, exist_ok=True)
 
+@app.route('/')
+def index():
+    return send_from_directory('static', 'index.html')
+
 @app.route('/api/upload', methods=['POST'])
 def upload_video():
     if 'file' not in request.files:
@@ -32,7 +36,7 @@ def upload_video():
 
 def detect(video_path):
     cap = cv2.VideoCapture(video_path)
-    output_path = os.path.join(PROCESSED_FOLDER, 'processed_' + os.path.basename(video_path))
+    output_path = os.path.join(PROCESSED_FOLDER, 'processed_' + os.path.basename(video_path).split('.')[0] + '.webm')
     fourcc = cv2.VideoWriter_fourcc(*'vp80')
     out = cv2.VideoWriter(output_path, fourcc, 20.0, (int(cap.get(3)), int(cap.get(4))))
     
