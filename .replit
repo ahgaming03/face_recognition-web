@@ -1,0 +1,14 @@
+# run = "cowsay Configure me! GG"
+modules = ["python-3.10"]
+run = "python app.py"
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "cowsay Configure me! GG"]
+
+[[ports]]
+localPort = 5000
+externalPort = 5000
+exposeLocalhost = true
