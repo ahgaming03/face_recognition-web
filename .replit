@@ -1,6 +1,6 @@
 # run = "cowsay Configure me! GG"
 modules = ["python-3.10"]
-run = "python backend/app.py"
+run = "python app.py"
 
 
 [nix]

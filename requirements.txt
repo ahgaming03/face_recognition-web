@@ -4,3 +4,5 @@ opencv-python
 tensorflow
 mtcnn
 scikit-learn
+numpy
+scipy
