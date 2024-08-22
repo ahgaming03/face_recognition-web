@@ -1,5 +1,6 @@
 { pkgs }: {
   deps = [
+    pkgs.deploy-rs
     pkgs.glibcLocales
     pkgs.libGLU
     pkgs.libGL
