@@ -1,5 +1,4 @@
-# run = "cowsay Configure me! GG"
-modules = ["python-3.10"]
+modules = ["python-3.12", "nodejs-20", "web", "nix"]
 run = "python backend/app.py"
 
 
